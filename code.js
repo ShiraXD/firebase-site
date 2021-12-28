@@ -24,6 +24,22 @@ function onBodyLoad()
     //alert("Loaded");
 }
 
+function verifyCredentials()
+{
+  if(verifyEmail() == false)
+  {
+    return false;
+  }
+  if (verifyPassword() == false)
+  {
+  return false;
+  }
+  else
+  {
+    //continue to db auth
+    alert("Password is correct");
+  }
+}
 function verifyPassword() {
   var pw = document.getElementById("password").value;
   //check empty password field
@@ -56,8 +72,15 @@ function verifyPassword() {
     return false;
   }
 
-  else
-  {
-     alert("Password is correct"); //********rembver here call the requiered funtion to db!!
-  }
+}
+
+function verifyEmail()
+{
+    var email = document.getElementById("email").value;
+    var regexEmail =  /(.+)@(.+){2,}\.(.+){2,}/;
+    if (regexEmail.test(email) == false)
+    {
+        document.getElementById("message").innerHTML = "Email is not valid. Should be in a form of x@xx.xx";
+        return false;
+    }
 }
