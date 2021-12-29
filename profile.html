@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+
+    <!-- Responsive header -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+        .profile-div{
+            background-image: url('id-card.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 20% 80%;
+            width: 500px;
+            height: 500px;
+        }
+
+        .container {
+          position: relative;
+          text-align: center;
+          color: white;
+        }
+
+        .bottom-left {
+          position: absolute;
+          bottom: 8px;
+          left: 16px;
+        }
+
+        .top-left {
+          position: absolute;
+          top: 8px;
+          left: 16px;
+        }
+
+        .top-right {
+          position: absolute;
+          top: 8px;
+          right: 16px;
+        }
+
+        .bottom-right {
+          position: absolute;
+          bottom: 8px;
+          right: 16px;
+        }
+          .email {
+          position: absolute;
+          top: 75%;
+          left: 10.5%;
+          transform: translate(-50%, -50%);
+        }
+         .birthdate {
+          position: absolute;
+          top: 65%;
+          left: 10.5%;
+          transform: translate(-50%, -50%);
+        }
+
+        .address {
+          position: absolute;
+          top: 55%;
+          left: 9.25%;
+          transform: translate(-50%, -50%);
+        }
+        .name {
+          position: absolute;
+          top: 45%;
+          left: 9%;
+          transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body onLoad="onProfileBodyLoad()">
+<div>
+    <img src="id-card.png" alt="Snow" style="width:20%;">
+    <span id="name" class="name"></span><br>
+    <span id="address" class="address"></span><br>
+    <span id="birthdate" class="birthdate"></span>
+    <span id="email" class="email"></span>
+</div>
+
+
+<script type="module" src="code.js"></script>
+<script></script>
+
+</body>
+</html>

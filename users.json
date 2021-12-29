@@ -1,0 +1,14 @@
+{
+	"users": {
+		"wfzyfUj3hWa9Z6jwjDFA7KsgO5a2": {
+			"name": "Tom",
+			"birthdate": "12-12-1990",
+			"address": "Haifa"
+		},
+		"yUqLH3HwHAcvBKzomc3wnlNlklp2": {
+			"name": "Jerry",
+			"birthdate": "12-12-1990",
+			"address": "Haifa"
+		}
+	}
+}
