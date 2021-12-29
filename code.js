@@ -1,17 +1,12 @@
 
 
-// Import the functions you need from the SDKs you need
-//import { initializeApp } from "firebase/app";
-//import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
 
 import { getAuth, signInWithEmailAndPassword,onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-//import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-//import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-// TODO: Add SDKs for Firebase products that you want to use
+
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
@@ -33,50 +28,40 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 
 
-
-function onSubmitClick()
-{
-    //alert("Thanks");
-}
-
 window.onProfileBodyLoad = function onProfileBodyLoad()
 {
-    console.log("Loaded");
-    //console.log(auth.currentUser.uid);
-    //asyncronic function- calls the function within when the user signs in or out
+    // asynchronous function- calls the function within when the user signs in or out
     onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    console.log(uid);
-
-    //user is signed in. read data
-    readLoggedInUserData(user);
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
+    if (user)
+    {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        console.log(uid);
+        //user is signed in. read data
+        readLoggedInUserData(user);
+    }
+    else
+    {
+        // User is signed out
+    }
+    });
 }
 
 window.verifyCredentials = function verifyCredentials()
 {
     if(verifyEmail() == false)
     {
-        return false;
+        return;
     }
     if (verifyPassword() == false)
     {
-        return false;
+        return;
     }
     else
     {
-        //continue to db auth
         console.log("Password is valid");
         signIn();
-
     }
 }
 
@@ -114,19 +99,29 @@ function verifyPassword()
         document.getElementById("message").innerHTML = "Password must contains at least one letter";
         return false;
     }
+
+    return true;
 }
 
 function verifyEmail()
 {
     var email = document.getElementById("email").value;
+
+    if(email == "")
+    {
+        document.getElementById("message").innerHTML = "Email is empty";
+        return false;
+    }
+
     var regexEmail =  /(.+)@(.+){2,}\.(.+){2,}/;
     if (regexEmail.test(email) == false)
     {
         document.getElementById("message").innerHTML = "Email is not valid. Should be in a form of x@xx.xx";
         return false;
     }
-}
 
+    return true;
+}
 
 
 function signIn()
@@ -134,15 +129,13 @@ function signIn()
     var password = document.getElementById("password").value;
     var email = document.getElementById("email").value;
 
-    //signInWithEmailAndPassword is asycronic function- runs only when the sign in is completed
-    //readLoggedInUser is called inside so that it wont happen before the user is signed in--------------------------------
+    //signInWithEmailAndPassword is asynchronous function, "then" is called when the authentication was completed
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         console.log("signed in");
         var uid = user.uid;
-        //const userId = auth.currentUser.uid;
         console.log(uid);
         //redirect ot profile page
         window.location.href = "profile.html";
@@ -150,28 +143,26 @@ function signIn()
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
+        document.getElementById("message").innerHTML=errorMessage;
       });
 }
 
 
 function readLoggedInUserData(user)
 {
-
     const db = getDatabase();
 
+    // read from db by uid
     return onValue(ref(db, '/users/' + user.uid), (snapshot) => {
       const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
       console.log(snapshot.val().name);
       setProfile(snapshot.val(), user);
-
-
-      // ...
     }, {
       onlyOnce: true
     });
 }
 
+//sets profile information on profile.html page
 function setProfile(userInfo, user)
 {
     var name = document.getElementById("name");

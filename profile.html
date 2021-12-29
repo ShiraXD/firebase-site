@@ -1,89 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>My Profile</title>
+<title>Profile page</title>
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
 
-    <!-- Responsive header -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <style>
-        .profile-div{
-            background-image: url('id-card.png');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 20% 80%;
-            width: 500px;
-            height: 500px;
-        }
+.title {
+  color: grey;
+  font-size: 18px;
+}
 
-        .container {
-          position: relative;
-          text-align: center;
-          color: white;
-        }
+.email {
+  border: none;
+  display: inline-block;
+  padding: 0px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  width: 100%;
+  font-size: 18px;
+}
 
-        .bottom-left {
-          position: absolute;
-          bottom: 8px;
-          left: 16px;
-        }
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
 
-        .top-left {
-          position: absolute;
-          top: 8px;
-          left: 16px;
-        }
 
-        .top-right {
-          position: absolute;
-          top: 8px;
-          right: 16px;
-        }
-
-        .bottom-right {
-          position: absolute;
-          bottom: 8px;
-          right: 16px;
-        }
-          .email {
-          position: absolute;
-          top: 75%;
-          left: 10.5%;
-          transform: translate(-50%, -50%);
-        }
-         .birthdate {
-          position: absolute;
-          top: 65%;
-          left: 10.5%;
-          transform: translate(-50%, -50%);
-        }
-
-        .address {
-          position: absolute;
-          top: 55%;
-          left: 9.25%;
-          transform: translate(-50%, -50%);
-        }
-        .name {
-          position: absolute;
-          top: 45%;
-          left: 9%;
-          transform: translate(-50%, -50%);
-        }
-    </style>
+</style>
 </head>
-<body onLoad="onProfileBodyLoad()">
-<div>
-    <img src="id-card.png" alt="Snow" style="width:20%;">
-    <span id="name" class="name"></span><br>
-    <span id="address" class="address"></span><br>
-    <span id="birthdate" class="birthdate"></span>
-    <span id="email" class="email"></span>
-</div>
 
+<body onLoad="onProfileBodyLoad()">
+
+<h2 style="text-align:center">My Profile</h2>
+
+<div class="card">
+    <img src="profile.jpg" alt="Profile" style="width:80%;">
+    <h2 id="name" class="name"></h2><br>
+    <span class="title" id="address" class="address"></span><br>
+    <span class="title" id="birthdate" class="birthdate"></span>
+    <span class="email" id="email" class="email"></span>
+</div>
+</body>
 
 <script type="module" src="code.js"></script>
-<script></script>
 
-</body>
+
 </html>
